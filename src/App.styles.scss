@@ -1,5 +1,29 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .search-bar {
+    background-color: rgb(209, 193, 52);
+    border-radius: 10px;
+    margin: 10px;
+
+    .submit-btn {
+      padding: 10px;
+      background-color: white;
+      border-radius: 5px;
+      margin: 10px;
+    }
+  }
+  .description {
+    padding: 10px;
+    background-color: rgb(216, 228, 240);
+    border-radius: 5px;
+    margin: 10px;
+  }
+
+  
 }
 
 .App-logo {
