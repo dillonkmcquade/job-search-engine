@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import JobCard from "./components/job-card/job-card.component";
 
 import "./App.styles.scss";
+import DescriptionCard from "./components/description-card/description-card.component";
 
 const App = () => {
   const [description, setDescription] = useState("");
@@ -9,7 +10,6 @@ const App = () => {
   const [jobs, setJobs] = useState({ jobData: [] });
 
   const onSubmit = event => {
-    console.log(jobs);
     event.preventDefault();
     fetch("http://localhost:3001/jobs", {
       method: "post",
@@ -22,10 +22,8 @@ const App = () => {
       .then(response => response.json())
       .then(jobData => {
         setJobs({ jobData });
-        console.log(jobData);
       })
       .catch(err => console.log(err));
-    console.log(jobs);
   };
   return (
     <div className="App">
@@ -53,6 +51,9 @@ const App = () => {
           onClick={onSubmit}
         />
       </form>
+      <p style={{ padding: "10px" }}>
+        {jobs.jobData ? jobs.jobData.length : "0 "} jobs found.
+      </p>
       {jobs.jobData ? (
         jobs.jobData.map(({ id, ...otherProps }) => (
           <JobCard key={id} {...otherProps} />
@@ -60,6 +61,7 @@ const App = () => {
       ) : (
         <div>No Results</div>
       )}
+      <DescriptionCard jobs={jobs.jobData} />
     </div>
   );
 };
