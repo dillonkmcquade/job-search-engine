@@ -14,8 +14,8 @@ const JobCard = ({
     <div className="job-card-container">
       <div
         className="job-card-logo"
-        style={{ backgroundImage: `url(${company_logo})` }}
-      />
+        
+      ><img src={company_logo} alt='company logo' /></div>
       <div className="job-card-info">
         <a href={url}>{title}</a>
         <span>{company}</span>
