@@ -6,7 +6,7 @@ import "./App.styles.scss";
 const App = () => {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-  const [jobs, setJobs] = useState({jobData: []});
+  const [jobs, setJobs] = useState({ jobData: [] });
 
   const onSubmit = event => {
     console.log(jobs);
@@ -22,31 +22,36 @@ const App = () => {
       .then(response => response.json())
       .then(jobData => {
         setJobs({ jobData });
-        console.log(jobData)
+        console.log(jobData);
       })
       .catch(err => console.log(err));
     console.log(jobs);
   };
   return (
     <div className="App">
-      <form className='search-bar'>
+      <form className="search-bar">
         <input
-          className='description'
+          className="description"
           type="text"
           value={description}
-          placeholder='Search by job description'
+          placeholder="Search by job description"
           onChange={event => setDescription(event.target.value)}
           required
         />
         <input
-          className='description'
+          className="description"
           type="text"
           value={location}
-          placeholder='Search by location'
+          placeholder="Search by location"
           onChange={event => setLocation(event.target.value)}
           required
         />
-        <input className='submit-btn'type="submit" value="Submit" onClick={onSubmit} />
+        <input
+          className="submit-btn"
+          type="submit"
+          value="Submit"
+          onClick={onSubmit}
+        />
       </form>
       {jobs.jobData ? (
         jobs.jobData.map(({ id, ...otherProps }) => (
