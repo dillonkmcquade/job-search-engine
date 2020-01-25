@@ -19,6 +19,6 @@ const DescriptionCard = ({
       <p>{how_to_apply}</p>
     </div>
   );
-};
+}
 
 export default DescriptionCard;
