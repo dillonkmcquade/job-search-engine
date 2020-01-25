@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import JobCard from "./components/job-card/job-card.component";
 import "./App.styles.scss";
+import DescriptionCard from "./components/description-card/description-card.component";
 
 const App = () => {
   const [description, setDescription] = useState("");
@@ -59,6 +60,7 @@ const App = () => {
       ) : (
         <div>No Results</div>
       )}
+      <DescriptionCard />
     </div>
   );
 };
