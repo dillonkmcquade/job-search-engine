@@ -1,7 +1,8 @@
 import React from "react";
 import "./job-card.styles.scss";
 
-const JobCard = ({ company_logo, title, type, url, company, location }) => {
+const JobCard = ({ job }) => {
+  const { company_logo, title, type, url, company, location } = job;
   return (
     <div className="job-card-container">
       <div className="job-card-logo">

@@ -4,9 +4,13 @@ import "./App.styles.scss";
 import DescriptionCard from "./components/description-card/description-card.component";
 
 const App = () => {
+  
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [jobs, setJobs] = useState({ jobData: [] });
+  const [currentJob, setCurrentJob] = useState({});
+  const [isDisplayHidden, toggleHidden] = useState(true);
+
 
   const onSubmit = event => {
     event.preventDefault();
@@ -23,6 +27,13 @@ const App = () => {
         setJobs({ jobData });
       })
       .catch(err => console.log(err));
+  };
+
+  const onClickDisplay = ({ job }) => {
+    console.log("i just ran");
+    setCurrentJob({ job });
+    isDisplayHidden === true ? toggleHidden(false) : toggleHidden(true);
+    console.log(currentJob);
   };
   return (
     <div className="App">
@@ -54,13 +65,17 @@ const App = () => {
         {jobs.jobData ? jobs.jobData.length : "0 "} jobs found.
       </p>
       {jobs.jobData ? (
-        jobs.jobData.map(({ id, ...otherProps }) => (
-          <JobCard key={id} {...otherProps} />
+        jobs.jobData.map(job => (
+          <JobCard
+            key={job.id}
+            job={job}
+            onClick={() => onClickDisplay({ job })}
+          />
         ))
       ) : (
         <div>No Results</div>
       )}
-      <DescriptionCard />
+      {isDisplayHidden ? <DescriptionCard job={currentJob} /> : null}
     </div>
   );
 };
