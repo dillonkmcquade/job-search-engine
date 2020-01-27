@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import JobCard from "./components/job-card/job-card.component";
 import "./App.styles.scss";
-import DescriptionCard from "./components/description-card/description-card.component";
+import LazySpinner from "./components/lazySpinner/lazy-spinner.component";
+
+const DescriptionCard = lazy(() =>
+  import("./components/description-card/description-card.component")
+);
 
 const App = () => {
-  
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [jobs, setJobs] = useState({ jobData: [] });
   const [currentJob, setCurrentJob] = useState({});
-  const [isDisplayHidden, toggleHidden] = useState(true);
-
+  const [isDisplayHidden, toggleHidden] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const onSubmit = event => {
     event.preventDefault();
+    setLoading(true);
     fetch("http://localhost:3001/jobs", {
       method: "post",
       headers: { "Content-Type": "application/json" },
@@ -25,16 +29,16 @@ const App = () => {
       .then(response => response.json())
       .then(jobData => {
         setJobs({ jobData });
+        setLoading(false);
       })
       .catch(err => console.log(err));
   };
 
   const onClickDisplay = ({ job }) => {
-    console.log("i just ran");
     setCurrentJob({ job });
-    isDisplayHidden === true ? toggleHidden(false) : toggleHidden(true);
-    console.log(currentJob);
+    toggleHidden(true);
   };
+
   return (
     <div className="App">
       <form className="search-bar">
@@ -65,17 +69,19 @@ const App = () => {
         {jobs.jobData ? jobs.jobData.length : "0 "} jobs found.
       </p>
       {jobs.jobData ? (
-        jobs.jobData.map(job => (
-          <JobCard
-            key={job.id}
-            job={job}
-            onClick={() => onClickDisplay({ job })}
-          />
-        ))
-      ) : (
-        <div>No Results</div>
-      )}
-      {isDisplayHidden ? <DescriptionCard job={currentJob} /> : null}
+        isLoading === true ? (
+          <LazySpinner />
+        ) : (
+          jobs.jobData.map(job => (
+            <JobCard key={job.id} job={job} onClickDisplay={onClickDisplay} />
+          ))
+        )
+      ) : null}
+      {isDisplayHidden ? (
+        <Suspense fallback={LazySpinner}>
+          <DescriptionCard job={currentJob} />
+        </Suspense>
+      ) : null}
     </div>
   );
 };
