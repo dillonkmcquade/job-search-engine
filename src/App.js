@@ -1,11 +1,22 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import JobCard from "./components/job-card/job-card.component";
 import "./App.styles.scss";
 import LazySpinner from "./components/lazySpinner/lazy-spinner.component";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 
 const DescriptionCard = lazy(() =>
   import("./components/description-card/description-card.component")
 );
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: 200
+    }
+  }
+}));
 
 const App = () => {
   const [description, setDescription] = useState("");
@@ -14,6 +25,22 @@ const App = () => {
   const [currentJob, setCurrentJob] = useState({});
   const [isDisplayHidden, toggleHidden] = useState(false);
   const [isLoading, setLoading] = useState(false);
+
+  const classes = useStyles();
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("http://localhost:3001/initialJobs", {
+      method: "get",
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(res => res.json())
+      .then(jobData => {
+        setJobs({ jobData });
+        setLoading(false);
+      })
+      .catch(err => console.log("error fetching jobs"));
+  }, []);
 
   const onSubmit = event => {
     event.preventDefault();
@@ -34,6 +61,10 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const closeDescriptionCard = () => {
+    toggleHidden(false);
+  };
+
   const onClickDisplay = ({ job }) => {
     setCurrentJob({ job });
     toggleHidden(true);
@@ -41,27 +72,29 @@ const App = () => {
 
   return (
     <div className="App">
-      <form className="search-bar">
-        <input
-          className="description"
-          type="text"
+      <form
+        className={`${classes.root} search-bar`}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-basic"
+          label="Job Description"
+          variant="outlined"
           value={description}
-          placeholder="Search by job description"
           onChange={event => setDescription(event.target.value)}
-          required
         />
-        <input
-          className="description"
-          type="text"
+        <TextField
+          id="outlined-basic"
+          label="Location"
+          variant="outlined"
           value={location}
-          placeholder="Search by location"
           onChange={event => setLocation(event.target.value)}
-          required
         />
         <input
           className="submit-btn"
           type="submit"
-          value="Submit"
+          value="Find Jobs"
           onClick={onSubmit}
         />
       </form>
@@ -79,7 +112,10 @@ const App = () => {
       ) : null}
       {isDisplayHidden ? (
         <Suspense fallback={LazySpinner}>
-          <DescriptionCard job={currentJob} />
+          <DescriptionCard
+            job={currentJob}
+            closeDescriptionCard={closeDescriptionCard}
+          />
         </Suspense>
       ) : null}
     </div>
