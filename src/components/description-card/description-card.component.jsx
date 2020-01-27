@@ -4,8 +4,6 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const DescriptionCard = ({ job, closeDescriptionCard }) => {
   const { title, description, company_logo, how_to_apply, location } = job.job;
-  console.log("description card ran");
-  console.log({ job });
 
   const descriptionTxt = () => {
     return { __html: description };

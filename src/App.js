@@ -1,13 +1,10 @@
-import React, { useState, lazy, Suspense, useEffect } from "react";
+import React, { useState } from "react";
 import JobCard from "./components/job-card/job-card.component";
 import "./App.styles.scss";
 import LazySpinner from "./components/lazySpinner/lazy-spinner.component";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
-
-const DescriptionCard = lazy(() =>
-  import("./components/description-card/description-card.component")
-);
+import DescriptionCard from "./components/description-card/description-card.component";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,32 +22,39 @@ const App = () => {
   const [currentJob, setCurrentJob] = useState({});
   const [isDisplayHidden, toggleHidden] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
 
   const classes = useStyles();
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:3001/initialJobs", {
-      method: "get",
-      headers: { "Content-Type": "application/json" }
-    })
-      .then(res => res.json())
-      .then(jobData => {
-        setJobs({ jobData });
-        setLoading(false);
-      })
-      .catch(err => console.log("error fetching jobs"));
-  }, []);
+  const nextPage = () => {
+    if (jobs.jobData.length === 50) {
+      setPage(page + 1);
+      fetchData(page + 1);
+    } else if (jobs.jobData.length === 0) {
+      return null;
+    } else if (jobs.jobData.length > 0 && jobs.jobData.length < 50) {
+      return null;
+    }
+  };
 
-  const onSubmit = event => {
-    event.preventDefault();
+  const previousPage = () => {
+    if (page - 1 === 0) {
+      return null;
+    } else {
+      setPage(page - 1);
+      fetchData(page - 1);
+    }
+  };
+
+  const fetchData = pageNumber => {
     setLoading(true);
-    fetch("http://localhost:3001/jobs", {
+    fetch("https://job-search-engine-api.herokuapp.com/jobs", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         description: description,
-        location: location
+        location: location,
+        page: pageNumber
       })
     })
       .then(response => response.json())
@@ -59,6 +63,12 @@ const App = () => {
         setLoading(false);
       })
       .catch(err => console.log(err));
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    setLoading(true);
+    fetchData();
   };
 
   const closeDescriptionCard = () => {
@@ -110,14 +120,22 @@ const App = () => {
           ))
         )
       ) : null}
+
       {isDisplayHidden ? (
-        <Suspense fallback={LazySpinner}>
-          <DescriptionCard
-            job={currentJob}
-            closeDescriptionCard={closeDescriptionCard}
-          />
-        </Suspense>
+        <DescriptionCard
+          job={currentJob}
+          closeDescriptionCard={closeDescriptionCard}
+        />
       ) : null}
+      <div className="pagination">
+        <span className="pageination-btn" onClick={() => previousPage()}>
+          &#10092; Previous
+        </span>
+        <span className='current-page'>Page {page}</span>
+        <span className="pageination-btn" onClick={() => nextPage()}>
+          Next &#10093;
+        </span>
+      </div>
     </div>
   );
 };
