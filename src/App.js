@@ -69,6 +69,7 @@ const App = () => {
     event.preventDefault();
     setLoading(true);
     fetchData();
+    setPage(1);
   };
 
   const closeDescriptionCard = () => {
@@ -109,7 +110,8 @@ const App = () => {
         />
       </form>
       <p style={{ padding: "10px" }}>
-        {jobs.jobData ? jobs.jobData.length : "0 "} jobs found.
+        {jobs.jobData ? jobs.jobData.length : "0 "}
+        {jobs.jobData.length === 50 ? "+" : null} jobs found.
       </p>
       {jobs.jobData ? (
         isLoading === true ? (
@@ -131,7 +133,7 @@ const App = () => {
         <span className="pageination-btn" onClick={() => previousPage()}>
           &#10092; Previous
         </span>
-        <span className='current-page'>Page {page}</span>
+        <span className="current-page">Page {page}</span>
         <span className="pageination-btn" onClick={() => nextPage()}>
           Next &#10093;
         </span>
