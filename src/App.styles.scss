@@ -17,6 +17,10 @@
     border-radius: 5px;
     font-weight: bold;
     position: fixed;
+    @media screen and (max-width: 800px) {
+      width: 100vw;
+      bottom: 0px;
+    }
 
     .current-page {
       
@@ -38,6 +42,13 @@
     margin: 10px;
     width: auto;
     max-width: 40vw;
+    @media screen and (max-width: 800px) {
+      width: 99vw;
+      max-width: none;
+      margin: 0px;
+      border-radius: 0px;
+    }
+
 
     .submit-btn {
       padding: 10px;
