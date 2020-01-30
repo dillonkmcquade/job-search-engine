@@ -5,6 +5,8 @@ import LazySpinner from "./components/lazySpinner/lazy-spinner.component";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import DescriptionCard from "./components/description-card/description-card.component";
+import ErrorBoundary from "./components/ErrorBoundary";
+import PageinationBar from "./components/pageination-bar/pageination-bar.component";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,8 +61,12 @@ const App = () => {
     })
       .then(response => response.json())
       .then(jobData => {
-        setJobs({ jobData });
-        setLoading(false);
+        if (jobData) {
+          setJobs({ jobData });
+          setLoading(false);
+        } else {
+          return null;
+        }
       })
       .catch(err => console.log(err));
   };
@@ -113,15 +119,15 @@ const App = () => {
         {jobs.jobData ? jobs.jobData.length : "0 "}
         {jobs.jobData.length === 50 ? "+" : null} jobs found.
       </p>
-      {jobs.jobData ? (
-        isLoading === true ? (
+      <ErrorBoundary>
+        {!jobs.jobData ? null : isLoading === true ? (
           <LazySpinner />
         ) : (
           jobs.jobData.map(job => (
             <JobCard key={job.id} job={job} onClickDisplay={onClickDisplay} />
           ))
-        )
-      ) : null}
+        )}
+      </ErrorBoundary>
 
       {isDisplayHidden ? (
         <DescriptionCard
@@ -129,15 +135,11 @@ const App = () => {
           closeDescriptionCard={closeDescriptionCard}
         />
       ) : null}
-      <div className="pagination">
-        <span className="pageination-btn" onClick={() => previousPage()}>
-          &#10092; Previous
-        </span>
-        <span className="current-page">Page {page}</span>
-        <span className="pageination-btn" onClick={() => nextPage()}>
-          Next &#10093;
-        </span>
-      </div>
+      <PageinationBar
+        page={page}
+        nextPage={nextPage}
+        previousPage={previousPage}
+      />
     </div>
   );
 };

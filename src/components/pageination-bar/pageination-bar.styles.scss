@@ -1,0 +1,30 @@
+.pagination {
+  display: flex;
+  justify-content: space-around;
+  width: 50vw;
+  bottom: 10px;
+  padding: 20px;
+  background-color: white;
+  color: rgb(0, 119, 255);
+  align-self: center;
+  border-radius: 5px;
+  font-weight: bold;
+  position: fixed;
+  box-shadow: 15px 0px 10px -10px rgba(0, 0, 0, 0.51);
+  @media screen and (max-width: 800px) {
+    width: 100vw;
+    bottom: 0px;
+  }
+
+  .current-page {
+    font-size: 16px;
+  }
+
+  .pageination-btn {
+    cursor: pointer;
+
+    &:hover {
+      color: lightskyblue;
+    }
+  }
+}
