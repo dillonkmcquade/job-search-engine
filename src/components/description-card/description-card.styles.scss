@@ -28,7 +28,8 @@
     border-bottom: 1px solid gray;
   }
   .description-txt {
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: none;
     height: 65vh;
   }
 
