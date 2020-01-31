@@ -1,14 +1,20 @@
 import React from "react";
-import './pageination-bar.styles.scss';
+import "./pageination-bar.styles.scss";
 
-const PageinationBar = ({page, nextPage, previousPage}) => {
+const PageinationBar = ({ jobs, page, nextPage, previousPage }) => {
   return (
     <div className="pagination">
-      <span className="pageination-btn" onClick={() => previousPage()}>
+      <span
+        className={page === 1 ? "page-one" : "pageination-btn"}
+        onClick={() => previousPage()}
+      >
         &#10092; Previous
       </span>
       <span className="current-page">Page {page}</span>
-      <span className="pageination-btn" onClick={() => nextPage()}>
+      <span
+        className={jobs.jobData.length < 50 ? "page-one" : "pageination-btn"}
+        onClick={() => nextPage()}
+      >
         Next &#10093;
       </span>
     </div>

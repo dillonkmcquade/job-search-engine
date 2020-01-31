@@ -8,6 +8,9 @@ import DescriptionCard from "./components/description-card/description-card.comp
 import ErrorBoundary from "./components/ErrorBoundary";
 import PageinationBar from "./components/pageination-bar/pageination-bar.component";
 import SearchBlob from "./components/search-blob/search-blob.component";
+import RoomIcon from "@material-ui/icons/Room";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,6 +29,7 @@ const App = () => {
   const [isDisplayHidden, toggleHidden] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const classes = useStyles();
 
@@ -74,9 +78,14 @@ const App = () => {
 
   const onSubmit = event => {
     event.preventDefault();
-    setLoading(true);
-    fetchData();
-    setPage(1);
+    if (location === "") {
+      return setErrorStatus(true);
+    } else {
+      setLoading(true);
+      fetchData();
+      setPage(1);
+      setErrorStatus(false);
+    }
   };
 
   const closeDescriptionCard = () => {
@@ -92,20 +101,39 @@ const App = () => {
     <div className="App">
       <form
         className={`${classes.root} search-bar`}
-        noValidate
+        Validate
         autoComplete="off"
       >
         <TextField
           id="outlined-basic"
           label="Job Description"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            )
+          }}
           variant="outlined"
+          size="small"
           value={description}
           onChange={event => setDescription(event.target.value)}
         />
         <TextField
-          id="outlined-basic"
+          required
+          id="input-with-icon-textfield"
           label="Location"
           variant="outlined"
+          size="small"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <RoomIcon />
+              </InputAdornment>
+            )
+          }}
+          error={errorStatus}
+          helperText={errorStatus ? "Field required" : null}
           value={location}
           onChange={event => setLocation(event.target.value)}
         />
@@ -138,11 +166,14 @@ const App = () => {
           closeDescriptionCard={closeDescriptionCard}
         />
       ) : null}
-      <PageinationBar
-        page={page}
-        nextPage={nextPage}
-        previousPage={previousPage}
-      />
+      {!jobs.jobData.length ? null : jobs.jobData.length === 50 || page > 1 ? (
+        <PageinationBar
+          jobs={jobs}
+          page={page}
+          nextPage={nextPage}
+          previousPage={previousPage}
+        />
+      ) : null}
     </div>
   );
 };
