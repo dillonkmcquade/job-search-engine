@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css?family=Fredoka+One&display=swap");
+.search-blob {
+  display: flex;
+  height: 500px;
+  width: 500px;
+  position: fixed;
+  z-index: -10;
+  margin-top: 150px;
+  margin-left: 100px;
+
+  @media screen and (max-width: 800px) {
+    height: 300px;
+    width: 300px;
+    margin-top: 40vh;
+    margin-left: 20vw;
+  }
+
+  .svg {
+    height: 100%;
+    width: 100%;
+  }
+  span {
+    position: fixed;
+    width: 50vw;
+    font-size: 30px;
+    margin-left: 300px;
+    margin-top: 50px;
+    font-family: "Fredoka One", cursive;
+
+    @media screen and (max-width: 800px) {
+      width: 50vw;
+      margin-top: 10vh;
+      margin-left: -150px;
+    }
+  }
+}

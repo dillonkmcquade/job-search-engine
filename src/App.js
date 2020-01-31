@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import DescriptionCard from "./components/description-card/description-card.component";
 import ErrorBoundary from "./components/ErrorBoundary";
 import PageinationBar from "./components/pageination-bar/pageination-bar.component";
+import SearchBlob from "./components/search-blob/search-blob.component";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -120,7 +121,9 @@ const App = () => {
         {jobs.jobData.length === 50 ? "+" : null} jobs found.
       </p>
       <ErrorBoundary>
-        {!jobs.jobData ? null : isLoading === true ? (
+        {!jobs.jobData.length ? (
+          <SearchBlob />
+        ) : isLoading ? (
           <LazySpinner />
         ) : (
           jobs.jobData.map(job => (
