@@ -17,13 +17,11 @@ const useStyles = makeStyles(theme => ({
     "& > *": {
       margin: theme.spacing(1),
       width: 200,
-      backgroundColor: '#96A1D3',
-      color: 'white'
-      
-      }
+      backgroundColor: "#96A1D3",
+      color: "white"
     }
   }
-));
+}));
 
 const App = () => {
   const [description, setDescription] = useState("");
@@ -105,11 +103,11 @@ const App = () => {
     <div className="App">
       <form
         className={`${classes.root} search-bar`}
-        Validate
+        noValidate
         autoComplete="off"
       >
         <TextField
-        className={classes.margin}
+          className={classes.margin}
           id="outlined-basic"
           label="Job Description"
           InputProps={{
@@ -149,7 +147,7 @@ const App = () => {
           onClick={onSubmit}
         />
       </form>
-      <p className='subtitle' style={{ padding: "10px" }}>
+      <p className="subtitle" style={{ padding: "10px" }}>
         {jobs.jobData ? jobs.jobData.length : "0 "}
         {jobs.jobData.length === 50 ? "+" : null} jobs found.
       </p>
