@@ -16,10 +16,14 @@ const useStyles = makeStyles(theme => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
-      width: 200
+      width: 200,
+      backgroundColor: '#96A1D3',
+      color: 'white'
+      
+      }
     }
   }
-}));
+));
 
 const App = () => {
   const [description, setDescription] = useState("");
@@ -105,6 +109,7 @@ const App = () => {
         autoComplete="off"
       >
         <TextField
+        className={classes.margin}
           id="outlined-basic"
           label="Job Description"
           InputProps={{
@@ -114,7 +119,7 @@ const App = () => {
               </InputAdornment>
             )
           }}
-          variant="outlined"
+          variant="filled"
           size="small"
           value={description}
           onChange={event => setDescription(event.target.value)}
@@ -123,7 +128,7 @@ const App = () => {
           required
           id="input-with-icon-textfield"
           label="Location"
-          variant="outlined"
+          variant="filled"
           size="small"
           InputProps={{
             startAdornment: (
@@ -144,7 +149,7 @@ const App = () => {
           onClick={onSubmit}
         />
       </form>
-      <p style={{ padding: "10px" }}>
+      <p className='subtitle' style={{ padding: "10px" }}>
         {jobs.jobData ? jobs.jobData.length : "0 "}
         {jobs.jobData.length === 50 ? "+" : null} jobs found.
       </p>

@@ -8,11 +8,12 @@
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 15px 15px 10px -10px rgba(0, 0, 0, 0.51);
-  background-color: rgb(83, 82, 81);
+  background-color: #162656;
   padding: 15px;
   font-size: 16px;
   line-height: 20px;
-  color: white;
+  color: rgb(214, 209, 209);
+  z-index: 3;
 
   @media screen and (max-width: 800px) {
     max-width: 80vw;

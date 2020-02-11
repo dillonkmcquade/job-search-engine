@@ -1,12 +1,16 @@
 .job-card-container {
   width: 50vw;
   height: 20vh;
-  background-color: rgb(146, 153, 153);
+  background-color: #2F4073;
+  color: white;
   display: flex;
   margin: 10px;
   cursor: pointer;
   border-radius: 10px;
   box-shadow: 15px 0px 10px -10px rgba(0, 0, 0, 0.51);
+  input {
+    color: white;
+  }
   @media screen and (max-width: 800px) {
     width: 90vw;
     margin: 2px;
@@ -41,7 +45,7 @@
     
     a {
       text-decoration: none;
-      color: black;
+      color: #061339;
       cursor: pointer;
       font-size: 16px;
       font-weight: bold;

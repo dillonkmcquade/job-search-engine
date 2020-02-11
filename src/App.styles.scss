@@ -4,18 +4,24 @@
   flex-direction: column;
   color: white;
   margin-bottom: 100px;
+
   @media screen and (max-width: 800px) {
     align-items: center;
   }
-
+  .subtitle {
+    margin-top: 10vh;
+    @media screen and (max-width: 800px){
+      margin-top: 20vh;
+    }
+    
+  }
 
   .search-bar {
-    background-color: white;
-    border-radius: 10px;
-    margin: 10px;
-    width: auto;
-    max-width: 40vw;
-    box-shadow: 15px 0px 10px -10px rgba(0, 0, 0, 0.51);
+    background-color: #061339;
+    position: fixed;
+    width: 100%;
+    
+    box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.51);
     @media screen and (max-width: 800px) {
       width: 99vw;
       max-width: none;
@@ -25,22 +31,19 @@
 
     .submit-btn {
       padding: 10px;
-      background-color: rgb(30, 87, 243);
+      background-color: #566798;
       border-radius: 5px;
+      color: #061339;
       margin: 10px;
       font-family: "ZCOOL QingKe HuangYou", cursive;
       font-weight: bold;
       font-size: 16px;
       border: none;
       cursor: pointer;
-      color: white;
       width: auto;
       &:hover {
-        color: lightskyblue;
+        color: white;
       }
     }
-    
   }
 }
-
-
