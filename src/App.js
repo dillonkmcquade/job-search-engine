@@ -83,7 +83,6 @@ const App = () => {
     if (location === "") {
       return setErrorStatus(true);
     } else {
-      
       fetchData();
       setPage(1);
       setErrorStatus(false);
