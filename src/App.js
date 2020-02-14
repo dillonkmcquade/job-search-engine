@@ -83,7 +83,7 @@ const App = () => {
     if (location === "") {
       return setErrorStatus(true);
     } else {
-      setLoading(true);
+      
       fetchData();
       setPage(1);
       setErrorStatus(false);
@@ -152,7 +152,7 @@ const App = () => {
         {jobs.jobData.length === 50 ? "+" : null} jobs found.
       </p>
       <ErrorBoundary>
-        {!jobs.jobData.length ? (
+        {!isLoading && jobs.jobData.length === 0 ? (
           <SearchBlob />
         ) : isLoading ? (
           <LazySpinner />

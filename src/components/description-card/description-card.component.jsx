@@ -3,7 +3,14 @@ import "./description-card.styles.scss";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const DescriptionCard = ({ job, closeDescriptionCard }) => {
-  const { title, description, company_logo, how_to_apply, location } = job.job;
+  const {
+    title,
+    description,
+    company_logo,
+    url,
+    how_to_apply,
+    location
+  } = job.job;
 
   const descriptionTxt = () => {
     return { __html: description };
@@ -40,6 +47,14 @@ const DescriptionCard = ({ job, closeDescriptionCard }) => {
       <div className="description-txt">
         <p dangerouslySetInnerHTML={descriptionTxt()}></p>
         <p dangerouslySetInnerHTML={howToApplyTxt()}></p>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="original-posting-btn"
+        >
+          <button>Original Posting</button>
+        </a>
       </div>
     </div>
   );

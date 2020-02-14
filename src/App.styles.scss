@@ -20,6 +20,7 @@
     background-color: #061339;
     position: fixed;
     width: 100%;
+    z-index: 2;
     
     box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.51);
     @media screen and (max-width: 800px) {

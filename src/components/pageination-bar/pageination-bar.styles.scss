@@ -5,12 +5,13 @@
   bottom: 10px;
   padding: 20px;
   background-color: #061339;
-  color: #96A1D3;
+  color: #96a1d3;
   align-self: center;
   border-radius: 5px;
   font-weight: bold;
   position: fixed;
   box-shadow: 15px 0px 10px -10px rgba(0, 0, 0, 0.51);
+  z-index: 2;
   @media screen and (max-width: 800px) {
     width: 100vw;
     bottom: 0px;
@@ -29,6 +30,6 @@
   }
 
   .page-one {
-    color: #2F4073;
+    color: #2f4073;
   }
 }

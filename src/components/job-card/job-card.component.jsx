@@ -2,7 +2,7 @@ import React from "react";
 import "./job-card.styles.scss";
 
 const JobCard = ({ job, onClickDisplay }) => {
-  const { company_logo, title, type, url, company, location } = job;
+  const { company_logo, title, type, company, location } = job;
   return (
     <div className="job-card-container" onClick={() => onClickDisplay({ job })}>
       <div className="job-card-logo">
@@ -16,7 +16,7 @@ const JobCard = ({ job, onClickDisplay }) => {
         />{" "}
       </div>
       <div className="job-card-info">
-        <a href={url}>{title}</a>
+        <h2 style={{ color: "white" }}>{title}</h2>
         <span>{company}</span>
         <span>{location}</span>
         <span>{type}</span>
