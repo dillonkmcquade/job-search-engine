@@ -9,12 +9,12 @@
   align-self: center;
   border-radius: 5px;
   font-weight: bold;
-  position: fixed;
   box-shadow: 15px 0px 10px -10px rgba(0, 0, 0, 0.51);
   z-index: 2;
   @media screen and (max-width: 800px) {
     width: 100vw;
     bottom: 0px;
+    position: fixed;
   }
 
   .current-page {

@@ -2,6 +2,9 @@
   width: 50vw;
   border-right: 2px solid #061339;
   padding-right: 25px;
+  @media screen and (max-width: 800px) {
+      border-right: 0px;
+  }
 
   .subtitle {
     padding: 10px;

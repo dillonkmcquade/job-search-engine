@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.styles.scss";
-import PageinationBar from "./components/pageination-bar/pageination-bar.component";
 import SearchBlob from "./components/search-blob/search-blob.component";
 
 import TextField from "@material-ui/core/TextField";
@@ -154,17 +153,11 @@ const App = () => {
           currentJob={currentJob}
           closeDescriptionCard={closeDescriptionCard}
           isDisplayHidden={isDisplayHidden}
-        />
-      )}
-
-      {!jobs.jobData.length ? null : jobs.jobData.length === 50 || page > 1 ? (
-        <PageinationBar
-          jobs={jobs}
           page={page}
           nextPage={nextPage}
           previousPage={previousPage}
         />
-      ) : null}
+      )}
     </div>
   );
 };

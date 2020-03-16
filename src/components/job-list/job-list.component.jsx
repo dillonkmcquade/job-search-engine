@@ -2,9 +2,10 @@ import React from "react";
 import SearchBlob from '../search-blob/search-blob.component';
 import LazySpinner from '../lazySpinner/lazy-spinner.component';
 import JobCard from '../job-card/job-card.component';
+import PageinationBar from '../pageination-bar/pageination-bar.component';
 import "./job-list.styles.scss";
 
-const JobList = ({ jobs, isLoading, onClickDisplay }) => {
+const JobList = ({ page, nextPage, previousPage, jobs, isLoading, onClickDisplay }) => {
   return (
     <div className="job-list">
       <p className="subtitle">
@@ -22,6 +23,14 @@ const JobList = ({ jobs, isLoading, onClickDisplay }) => {
           ))
         )}
       </div>
+      {!jobs.jobData.length ? null : jobs.jobData.length === 50 || page > 1 ? (
+        <PageinationBar
+          jobs={jobs}
+          page={page}
+          nextPage={nextPage}
+          previousPage={previousPage}
+        />
+      ) : null}
     </div>
   );
 };
