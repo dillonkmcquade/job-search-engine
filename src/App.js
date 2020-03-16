@@ -1,24 +1,8 @@
 import React, { useState } from "react";
 import "./App.styles.scss";
 import SearchBlob from "./components/search-blob/search-blob.component";
-
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import RoomIcon from "@material-ui/icons/Room";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
 import JobSearchBody from "./components/job-search-body/job-search-body.component";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: 200,
-      backgroundColor: "#96A1D3",
-      color: "white"
-    }
-  }
-}));
+import SearchBar from "./components/search-bar/search-bar.component";
 
 const App = () => {
   const [description, setDescription] = useState("");
@@ -29,8 +13,6 @@ const App = () => {
   const [isLoading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [errorStatus, setErrorStatus] = useState(false);
-
-  const classes = useStyles();
 
   const nextPage = () => {
     if (jobs.jobData.length === 50) {
@@ -97,52 +79,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <form
-        className={`${classes.root} search-bar`}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          className={classes.margin}
-          id="outlined-basic"
-          label="Job Description"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            )
-          }}
-          variant="filled"
-          size="small"
-          value={description}
-          onChange={event => setDescription(event.target.value)}
-        />
-        <TextField
-          required
-          id="input-with-icon-textfield"
-          label="Location"
-          variant="filled"
-          size="small"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <RoomIcon />
-              </InputAdornment>
-            )
-          }}
-          error={errorStatus}
-          helperText={errorStatus ? "Field required" : null}
-          value={location}
-          onChange={event => setLocation(event.target.value)}
-        />
-        <input
-          className="submit-btn"
-          type="submit"
-          value="Find Jobs"
-          onClick={onSubmit}
-        />
-      </form>
+      <SearchBar
+        onSubmit={onSubmit}
+        setDescription={setDescription}
+        setLocation={setLocation}
+        errorStatus={errorStatus}
+        description={description}
+        location={location}
+      />
       {jobs.jobData.length === 0 ? (
         <SearchBlob />
       ) : (

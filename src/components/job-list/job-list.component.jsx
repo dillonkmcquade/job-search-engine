@@ -1,9 +1,9 @@
 import React from "react";
-import SearchBlob from '../search-blob/search-blob.component';
 import LazySpinner from '../lazySpinner/lazy-spinner.component';
 import JobCard from '../job-card/job-card.component';
 import PageinationBar from '../pageination-bar/pageination-bar.component';
 import "./job-list.styles.scss";
+import Footer from "../footer/footer.component";
 
 const JobList = ({ page, nextPage, previousPage, jobs, isLoading, onClickDisplay }) => {
   return (
@@ -13,9 +13,7 @@ const JobList = ({ page, nextPage, previousPage, jobs, isLoading, onClickDisplay
         {jobs.jobData.length === 50 ? "+" : null} jobs found.
       </p>
       <div>
-        {!isLoading && jobs.jobData.length === 0 ? (
-          <SearchBlob />
-        ) : isLoading ? (
+        {isLoading ? (
           <LazySpinner />
         ) : (
           jobs.jobData.map(job => (
@@ -31,6 +29,7 @@ const JobList = ({ page, nextPage, previousPage, jobs, isLoading, onClickDisplay
           previousPage={previousPage}
         />
       ) : null}
+      <Footer />
     </div>
   );
 };
