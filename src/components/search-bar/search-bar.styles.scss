@@ -1,31 +1,31 @@
 .search-bar {
-    background-color: #061339;
-    position: fixed;
-    width: 100%;
-    z-index: 2;
-    box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.51);
-    @media screen and (max-width: 800px) {
-      width: 99vw;
-      max-width: none;
-      margin: 0px;
-      border-radius: 0px;
-    }
+  background-color: #061339;
+  width: 100%;
+  z-index: 2;
+  box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.51);
+  
+  @media screen and (max-width: 800px) {
+    width: 100vw;
+    max-width: none;
+    margin: 0px;
+    border-radius: 0px;
+  }
 
-    .submit-btn {
-      -webkit-appearance: none;
-      padding: 10px;
-      background-color: #a68930;
-      border-radius: 5px;
-      color: #061339;
-      margin: 10px;
-      font-family: "ZCOOL QingKe HuangYou", cursive;
-      font-weight: bold;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      width: auto;
-      &:hover {
-        color: white;
-      }
+  .submit-btn {
+    -webkit-appearance: none;
+    padding: 10px;
+    background-color: #a68930;
+    border-radius: 5px;
+    color: #061339;
+    margin: 10px;
+    font-family: "ZCOOL QingKe HuangYou", cursive;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    &:hover {
+      color: white;
     }
   }
+}
