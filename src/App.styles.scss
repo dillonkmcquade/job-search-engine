@@ -9,20 +9,12 @@
   @media screen and (max-width: 800px) {
     align-items: center;
   }
-  .subtitle {
-    margin-top: 10vh;
-    @media screen and (max-width: 800px){
-      margin-top: 22vh;
-    }
-    
-  }
 
   .search-bar {
     background-color: #061339;
     position: fixed;
     width: 100%;
     z-index: 2;
-    
     box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.51);
     @media screen and (max-width: 800px) {
       width: 99vw;

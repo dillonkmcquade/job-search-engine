@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import JobCard from "./components/job-card/job-card.component";
 import "./App.styles.scss";
-import LazySpinner from "./components/lazySpinner/lazy-spinner.component";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles } from "@material-ui/core/styles";
-import DescriptionCard from "./components/description-card/description-card.component";
-import ErrorBoundary from "./components/ErrorBoundary";
 import PageinationBar from "./components/pageination-bar/pageination-bar.component";
 import SearchBlob from "./components/search-blob/search-blob.component";
+
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 import RoomIcon from "@material-ui/icons/Room";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
+import JobSearchBody from "./components/job-search-body/job-search-body.component";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -146,28 +144,19 @@ const App = () => {
           onClick={onSubmit}
         />
       </form>
-      <p className="subtitle" style={{ padding: "10px" }}>
-        {jobs.jobData ? jobs.jobData.length : "0 "}
-        {jobs.jobData.length === 50 ? "+" : null} jobs found.
-      </p>
-      <ErrorBoundary>
-        {!isLoading && jobs.jobData.length === 0 ? (
-          <SearchBlob />
-        ) : isLoading ? (
-          <LazySpinner />
-        ) : (
-          jobs.jobData.map(job => (
-            <JobCard key={job.id} job={job} onClickDisplay={onClickDisplay} />
-          ))
-        )}
-      </ErrorBoundary>
-
-      {isDisplayHidden ? (
-        <DescriptionCard
-          job={currentJob}
+      {jobs.jobData.length === 0 ? (
+        <SearchBlob />
+      ) : (
+        <JobSearchBody
+          isLoading={isLoading}
+          onClickDisplay={onClickDisplay}
+          jobs={jobs}
+          currentJob={currentJob}
           closeDescriptionCard={closeDescriptionCard}
+          isDisplayHidden={isDisplayHidden}
         />
-      ) : null}
+      )}
+
       {!jobs.jobData.length ? null : jobs.jobData.length === 50 || page > 1 ? (
         <PageinationBar
           jobs={jobs}

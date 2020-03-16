@@ -1,20 +1,21 @@
+::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
 .description-card {
   position: fixed;
-  width: 30vw;
-  max-width: 30vw;
-  min-height: 50vh;
-  max-height: 80vh;
+  top: 100px;
   right: 50px;
-  top: 30px;
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 15px 15px 10px -10px rgba(0, 0, 0, 0.51);
+  padding-left: 15px;
+  width: 40%;
   background-color: #162656;
   padding: 15px;
   font-size: 16px;
   line-height: 20px;
   color: rgb(214, 209, 209);
   z-index: 3;
+  overflow-y: scroll;
+  overflow-x: none;
 
   .original-posting-btn {
     text-decoration: none;
@@ -51,8 +52,6 @@
     border-bottom: 1px solid gray;
   }
   .description-txt {
-    overflow-y: scroll;
-    overflow-x: none;
     height: 60vh;
   }
 
