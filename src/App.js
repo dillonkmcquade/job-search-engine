@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import "./App.styles.scss";
-import SearchBlob from "./components/search-blob/search-blob.component";
-import JobSearchBody from "./components/job-search-body/job-search-body.component";
-import SearchBar from "./components/search-bar/search-bar.component";
+import LazySpinner from "./components/lazySpinner/lazy-spinner.component";
+
+const SearchBlob = lazy(() =>
+  import("./components/search-blob/search-blob.component")
+);
+const JobSearchBody = lazy(() =>
+  import("./components/job-search-body/job-search-body.component")
+);
+const SearchBar = lazy(() =>
+  import("./components/search-bar/search-bar.component")
+);
 
 const App = () => {
   const [description, setDescription] = useState("");
@@ -79,29 +87,31 @@ const App = () => {
 
   return (
     <div className="App">
-      <SearchBar
-        onSubmit={onSubmit}
-        setDescription={setDescription}
-        setLocation={setLocation}
-        errorStatus={errorStatus}
-        description={description}
-        location={location}
-      />
-      {jobs.jobData.length === 0 ? (
-        <SearchBlob />
-      ) : (
-        <JobSearchBody
-          isLoading={isLoading}
-          onClickDisplay={onClickDisplay}
-          jobs={jobs}
-          currentJob={currentJob}
-          closeDescriptionCard={closeDescriptionCard}
-          isDisplayHidden={isDisplayHidden}
-          page={page}
-          nextPage={nextPage}
-          previousPage={previousPage}
+      <Suspense fallback={<LazySpinner />}>
+        <SearchBar
+          onSubmit={onSubmit}
+          setDescription={setDescription}
+          setLocation={setLocation}
+          errorStatus={errorStatus}
+          description={description}
+          location={location}
         />
-      )}
+        {jobs.jobData.length === 0 ? (
+          <SearchBlob />
+        ) : (
+          <JobSearchBody
+            isLoading={isLoading}
+            onClickDisplay={onClickDisplay}
+            jobs={jobs}
+            currentJob={currentJob}
+            closeDescriptionCard={closeDescriptionCard}
+            isDisplayHidden={isDisplayHidden}
+            page={page}
+            nextPage={nextPage}
+            previousPage={previousPage}
+          />
+        )}
+      </Suspense>
     </div>
   );
 };
