@@ -21,12 +21,7 @@ const DescriptionCard = ({ job, closeDescriptionCard }) => {
   };
   return (
     <div className="description-card">
-      <p
-        style={{ cursor: "pointer", position: "absolute", top: "-5px" }}
-        onClick={() => closeDescriptionCard()}
-      >
-        &#10005;
-      </p>
+      <p className="close-button" onClick={() => closeDescriptionCard()}>&#10005;</p>
       <div className="description-title">
         <div>
           <h2 style={{ color: "white" }}>{title}</h2>

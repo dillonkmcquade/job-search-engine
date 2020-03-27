@@ -3,7 +3,8 @@
   width: 100%;
   z-index: 2;
   box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.51);
-  
+  position: fixed;
+
   @media screen and (max-width: 800px) {
     width: 100vw;
     max-width: none;
@@ -24,8 +25,11 @@
     border: none;
     cursor: pointer;
     width: auto;
+    transition: opacity 0.2s ease-in-out;
+
     &:hover {
-      color: white;
+      filter: alpha(opacity=50);
+      opacity: 0.7;
     }
   }
 }

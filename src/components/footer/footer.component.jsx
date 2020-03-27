@@ -3,7 +3,7 @@ import "./footer.styles.scss";
 
 const Footer = () => {
   return (
-    <div className="footer-container">
+    <footer className="footer-container">
       <span>
         © 2020 Job Search Engine |{" "}
         <a
@@ -13,7 +13,7 @@ const Footer = () => {
           Site by Dillon McQuade
         </a>
       </span>
-    </div>
+    </footer>
   );
 };
 
