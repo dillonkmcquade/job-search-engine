@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from "react";
 import "./App.styles.scss";
 import LazySpinner from "./components/lazySpinner/lazy-spinner.component";
+import Footer from "./components/footer/footer.component";
 
 const SearchBlob = lazy(() =>
   import("./components/search-blob/search-blob.component")
@@ -111,6 +112,7 @@ const App = () => {
             previousPage={previousPage}
           />
         )}
+        <Footer />
       </Suspense>
     </div>
   );

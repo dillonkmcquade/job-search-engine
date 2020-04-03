@@ -3,7 +3,7 @@ import LazySpinner from '../lazySpinner/lazy-spinner.component';
 import JobCard from '../job-card/job-card.component';
 import PageinationBar from '../pageination-bar/pageination-bar.component';
 import "./job-list.styles.scss";
-import Footer from "../footer/footer.component";
+
 
 const JobList = ({ page, nextPage, previousPage, jobs, isLoading, onClickDisplay }) => {
   return (
@@ -29,7 +29,7 @@ const JobList = ({ page, nextPage, previousPage, jobs, isLoading, onClickDisplay
           previousPage={previousPage}
         />
       ) : null}
-      <Footer />
+      
     </div>
   );
 };

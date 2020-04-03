@@ -27,7 +27,7 @@ const SearchBar = ({
 }) => {
   const classes = useStyles();
   return (
-    <div>
+    <nav>
       <form
         className={`${classes.root} search-bar`}
         noValidate
@@ -74,7 +74,7 @@ const SearchBar = ({
           onClick={onSubmit}
         />
       </form>
-    </div>
+    </nav>
   );
 };
 

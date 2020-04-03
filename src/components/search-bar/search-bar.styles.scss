@@ -3,10 +3,10 @@
   width: 100%;
   z-index: 2;
   box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.51);
-  position: fixed;
+  
 
   @media screen and (max-width: 800px) {
-    width: 100vw;
+    width: 100%;
     max-width: none;
     margin: 0px;
     border-radius: 0px;
